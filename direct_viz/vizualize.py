@@ -2,14 +2,14 @@ from matplotlib.offsetbox import AnnotationBbox,OffsetImage
 import numpy as np
 import matplotlib.pyplot as plt
 import easygui
-import skimage.coloc as sColor
+import skimage.color as sColor
 from bokeh.plotting import figure, show, output_notebook,output_file,ColumnDataSource
 from bokeh.models import HoverTool
 
 
 
 #PLot a set of images with respect to the x and y coordinates given in parameter
-def plot_xy_and_save(images, xy):
+def plot_xy_and_save(xy,images,show_notebook=True):
     
     fig = plt.figure(figsize=(170, 170))
     plt.scatter(xy[:, 0], xy[:, 1], marker=None)
@@ -21,8 +21,12 @@ def plot_xy_and_save(images, xy):
         im.image.axis =ax
         ab =AnnotationBbox(im,[xy[i,0],xy[i,1]],frameon=False) 
         ax.add_artist(ab)
-    filename = easygui.filesavebox(msg = "Give a name to your plot")
-    fig.savefig(filename + ".jpg")
+    if(not show_notebook):
+        filename = easygui.filesavebox(msg = "Give a name to your plot")
+        fig.savefig(filename + ".jpg")
+        
+    else:
+        plt.show()
 
     
 #PLot a set of images with respect to the x and y coordinates, and using the interactive plot tool bokeh to ba able to display additionnal data
@@ -46,8 +50,8 @@ def bokeh_plot(imagesData,datas,xy):
     
     xandy = dict(
         image= grey,
-        x= xy[:,:,0]*30
-        y= xy[:,:,1]*30
+        x= xy[:,0]*30,
+        y= xy[:,1]*30
         )
 
     source = ColumnDataSource(data = {**xandy,**mydict}
@@ -67,7 +71,59 @@ def bokeh_plot(imagesData,datas,xy):
     p.image(image='image',x='x', y='y', dw=32, dh=32,source = source)
     show(p)
 
+#Plot a set of images in polar coordinates with r from the data given in argument and theta from the hue value of the principal color
+#rt is a list of  lists
+def circle_plot(rt, imagesData,show_notebook=True):
     
+    r = rt[0]
+    theta = rt[1]
+    image = imagesData.extract_lowRes()
+    fig = plt.figure(figsize = (170,170))
+    ax = plt.subplot(111, projection='polar')
+    ax.scatter(theta, r, marker = '.')
+    for i in range(len(images)) :
+        im = OffsetImage(images[i], cmap = 'gray', zoom=0.75)
+        im.image.axis =ax
+        ab =AnnotationBbox(im,(theta[i],r[i]),frameon=False) 
+        ax.add_artist(ab)
+    ax.set_rmax(np.max(r))
+    ax.set_rticks([]) 
+    ax.grid(True)
+    if(not show_notebook):
+        filename = easygui.filesavebox(msg = "Give a name to your plot")
+        fig.savefig(filename + ".jpg")
+        
+    else:
+        plt.show()
+    
+#PLot the set of images with its principal color in X and the second one in Y
+def principal_colors_plot(xy,imagesData,show_notebook=True):
+    
+    x= xy[0]
+    y= xy[1]
+    images = imagesData.extract_lowRes()
+    fig = plt.figure(figsize = (170,170))
+    ax = plt.subplot(111)
+
+    ax.scatter(x,y, marker = '.')
+    for i in range(len(images)) :
+        im = OffsetImage(images[i], cmap = 'gray', zoom=0.5)
+        im.image.axis =ax
+        ab =AnnotationBbox(im,(x[i],y[i]),frameon=False) 
+        ax.add_artist(ab)
+        ticks = np.linspace(0,np.max((x,y)),36)
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    ax.tick_params(labelsize = 75)
+    plt.xlabel('Principal color', fontsize=150)
+    plt.ylabel('Second principal color', fontsize=150)
+    if(not show_notebook):
+        filename = easygui.filesavebox(msg = "Give a name to your plot")
+        fig.savefig(filename + ".jpg")
+        
+    else:
+        plt.show()
+
     
     
     
