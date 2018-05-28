@@ -93,8 +93,7 @@ class ImageDataCollection :
             raise ValueError(
                 'Invalid Argument, the csvFile should contain exactly the same number of images as the ImageDataCollection')
         for col in columns:
-            for i in range(len(self.images)):
-                self.images[i].add_data(col,data[col][i])
+                self.add_data_for_all(col,data[col])
     
     def save_data_csv(self):
         location = easygui.diropenbox(default='/')
@@ -114,7 +113,7 @@ class ImageDataCollection :
         csv.to_csv(location+"/data_Images.csv")
         
 #Processing data for all images in the collection 
-    def get_data_forall(self,name):
+    def get_data_for_all(self,name):
         result  = []
         for elem in self.images:
             x= 0
@@ -126,7 +125,7 @@ class ImageDataCollection :
         return result
     
     def add_data_for_all(self,name,datas):
-        if len(data) != len(self.images):
+        if len(datas) != len(self.images):
             raise ValueError(
                 'Invalid Argument, the array should contain exactly the same number of images as the ImageDataCollection') 
         for i in range(len(self.images)):
