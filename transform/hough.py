@@ -5,7 +5,6 @@ import skimage.color as color
 from skimage.transform import hough_line,hough_line_peaks, probabilistic_hough_line
 from sklearn.decomposition import PCA 
 from sklearn.manifold import TSNE 
-
 from skimage.feature import canny
 
 

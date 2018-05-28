@@ -44,6 +44,9 @@ def bokeh_plot(imagesData,datas,xy):
     output_file(filename + ".html")
      
     #Creating the basic and the enhanced dictionnaries for each datas asked
+    values = []
+    for elem in datas:
+        values.append(imageData.get_data_forall(elem))
     mydict={}
     for i in range(len(datas)):
         mydict[datas[i]] = values[i]

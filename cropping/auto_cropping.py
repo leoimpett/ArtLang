@@ -1,5 +1,4 @@
 import numpy as np
-import skimage.io as io
 from skimage.filters.rank import entropy
 from skimage.morphology import disk
 from skimage.filters import gaussian

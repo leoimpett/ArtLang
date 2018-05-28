@@ -1,12 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from tqdm import tqdm
 import pandas as pd
 import requests
 import wget
-import skimage.io as io
-import skimage.color as sColor
-import math
 import easygui
 
 

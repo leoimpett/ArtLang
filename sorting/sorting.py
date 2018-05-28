@@ -1,8 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-%matplotlib inline
 import skimage.color as sColor
-from datastruct.imagedata import*
 
 
 def sortBy(imageData,sortingParam) :

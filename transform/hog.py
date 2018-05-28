@@ -1,7 +1,6 @@
 import numpy as np
 import skimage.color as sColor
 from skimage.feature import hog
-import skimage.transform as trs
 from sklearn.manifold import TSNE 
 from sklearn.decomposition import PCA 
 

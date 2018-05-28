@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import skimage.transform as trs
-import skimage.io as io
 import pandas as pd
 import easygui
 
@@ -35,16 +34,24 @@ class ImageDataCollection :
     def __init__(self,imagedatas):
         self.images = imagedatas
     @classmethod    
-    def from_array(cls,imageArray):
+    def from_array(cls,imageArray, data = []):
         imgdata_list = []
-        for elem in imageArray:
-            imgdata_list.append(ImageData(elem))
+        for i in range(len(imageArray)):
+            if(data != []):
+                imageData= ImageData(imageArray[i],data[i])
+            else:
+                imageData= ImageData(imageArray[i])
+        imgdata_list.append(imageData)
         return cls(imgdata_list)
     @classmethod
     def from_folder(cls):
         dirname = easygui.diropenbox(default = '/')
         images = io.imread_collection(dirname + '/*.jpg')
-        return ImageDataCollection.from_array(images)
+        filenames= glob.glob(dirname+'/*.jpg')
+        data=[]
+        for i in range(len(images)):
+            data.append({"path":filenames[i]})
+        return ImageDataCollection.from_array(images,data)
     
 # Addition, Deletion
     def add(self,imagedata):
