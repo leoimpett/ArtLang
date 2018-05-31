@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import skimage.transform as trs
 import pandas as pd
 import easygui
+import skimage.io as io
+import glob 
 
 class ImageData :
     def __init__(self,img, dat = {}):
@@ -41,7 +43,7 @@ class ImageDataCollection :
                 imageData= ImageData(imageArray[i],data[i])
             else:
                 imageData= ImageData(imageArray[i])
-        imgdata_list.append(imageData)
+            imgdata_list.append(imageData)
         return cls(imgdata_list)
     @classmethod
     def from_folder(cls):
