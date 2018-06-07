@@ -18,7 +18,7 @@ setup(name='artlang',
           'scipy',
           'pandas',
           'easygui',
-          'requests,
+          'requests',
           'wget'
       ]
 )
