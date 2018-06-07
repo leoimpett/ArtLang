@@ -7,7 +7,7 @@ setup(name='artlang',
       author='Robin Leurent',
       author_email='unknown',
       license='Cette œuvre est mise à disposition sous licence Attribution 3.0 Suisse. Pour voir une copie de cette licence, visitez http://creativecommons.org/licenses/by/3.0/ch/ ou écrivez à Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.',
-      packages = ['to be determined'],
+      packages = ['artlang'],
       install_requires=[
           'numpy',
           'bokeh',
