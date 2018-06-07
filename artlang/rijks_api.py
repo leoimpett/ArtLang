@@ -50,7 +50,7 @@ def downloadImages(csv):
     invalid = 0
     for i in range(csv.shape[0]):
         if(csv['webImage'][i] is not None):
-            wget.download(csv['webImage'][i]['url'],out=directory+"/image"+str(i)+".jpg")
+            wget.download(csv['webImage'][i]['url'],out=directory+"/RijksmuseumCollection"+str(i)+".jpg")
         else :
             invalid += 1
     return invalid

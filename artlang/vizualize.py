@@ -9,8 +9,8 @@ from bokeh.models import HoverTool
 
 
 #PLot a set of images with respect to the x and y coordinates given in parameter
-def plot_xy_and_save(xy,images,show_notebook=True):
-    
+def plot_xy_and_save(xy,imagesData,show_notebook=True):
+    images = imagesData.extract_lowRes()
     fig = plt.figure(figsize=(170, 170))
     plt.scatter(xy[:, 0], xy[:, 1], marker=None)
 
@@ -100,7 +100,7 @@ def circle_plot(rt, imagesData,show_notebook=True):
         plt.show()
     
 #PLot the set of images with its principal color in X and the second one in Y
-def principal_colors_plot(xy,imagesData,show_notebook=True):
+def two_dimensions_plot(xy,imagesData,show_notebook=True):
     
     x= xy[0]
     y= xy[1]
@@ -118,8 +118,8 @@ def principal_colors_plot(xy,imagesData,show_notebook=True):
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
     ax.tick_params(labelsize = 75)
-    plt.xlabel('Principal color', fontsize=150)
-    plt.ylabel('Second principal color', fontsize=150)
+    plt.xlabel('Principal dimension', fontsize=150)
+    plt.ylabel('Second principal dimension', fontsize=150)
     if(not show_notebook):
         filename = easygui.filesavebox(msg = "Give a name to your plot")
         fig.savefig(filename + ".jpg")
@@ -127,6 +127,11 @@ def principal_colors_plot(xy,imagesData,show_notebook=True):
     else:
         plt.show()
 
-    
-    
+def oneD_plot(images,rows,cols):
+    size =images[0].shape
+    canvas = np.zeros((rows*size[0],cols*size[1],3))
+    for i in range(len(images)):
+        canvas[int(i/cols)*size[0]:(int(i/cols)+1)*size[0],int(i%cols)*size[1]:(int(i%cols)+1)*size[1]] = images[i] 
+    filename = easygui.filesavebox(msg = "Give a name to your plot")
+    fig.savefig(filename + ".jpg")    
     

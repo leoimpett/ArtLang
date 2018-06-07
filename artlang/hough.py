@@ -29,7 +29,10 @@ def hough_transform(imagesData):
         houghImg.append(data)
         plt.close(fig)
    
+    return houghImg
 
+def hough_tsne(imagesData):
+    houghImg = hough_transform(imagesData)
     flattened = []
     for elem in houghImg :
         flattened.append(elem.flatten())
