@@ -13,5 +13,3 @@ Robin Leurent's semester project for Spring 2018
 - Expanding possible functionality to reach Imageplot ( http://lab.softwarestudies.com/p/imageplot.html) 
 - API call functions to the Rijksmuseum ( http://rijksmuseum.github.io/ ) 
 - Perhaps start to re-package things as functions/libraries? 
-
-Leo's Rijksstudio API key: rufUK4IC 
